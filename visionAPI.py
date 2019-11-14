@@ -11,7 +11,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'serviceAccountToken.json'
 
 # variable declarations
 FOLDER_PATH = r'./images'
-INPUT_FILE = 'test3.jpg'
+INPUT_FILE = 'test5.jpg'
 OUTPUT_FILE = 'output.txt'
 
 # call vision API to pull text from image
