@@ -5,17 +5,21 @@ import io
 from google.cloud import vision
 from google.cloud import translate_v2 as translate
 import pandas as pd
+import json
+import requests
 
-# setting google application credentials
+# loading credentials
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'serviceAccountToken.json'
+with open('telegramToken.json') as f:
+    data = json.load(f)
 
 # variable declarations
 FOLDER_PATH = r'./images'
 INPUT_FILE = 'test6.jpg'
+TELEGRAM_TOKEN = data['token']
+TELEGRAM_CHAT = data['chat']
+OUTPUT = ""
 OUTPUT_FILE = 'output.txt'
-
-# open output file
-f = open(OUTPUT_FILE, "w")
 
 # call vision API to pull text from image
 vClient = vision.ImageAnnotatorClient()
@@ -30,10 +34,11 @@ if not texts:
     objects = vClient.object_localization(
         image=image).localized_object_annotations
 
-    # write objects to a file
-    f.write('Number of objects found: {}'.format(len(objects)))
+    # store objects in a variable
+    OUTPUT = ('Number of objects found: {}'.format(len(objects)))
     for object_ in objects:
-        f.write('\n{} (confidence: {})'.format(object_.name, object_.score))
+        OUTPUT = OUTPUT + \
+            ('\n{} (confidence: {})'.format(object_.name, object_.score))
 
 # else parse text and translate
 else:
@@ -56,6 +61,13 @@ else:
         target_language="en"
     )
 
-    # write translation to a file
-    f.write(u'Translation: {}'.format(translation['translatedText']))
+    # store translation in a variable
+    OUTPUT = (u'Translation: {}'.format(translation['translatedText']))
+
+# output response
+f = open(OUTPUT_FILE, "w")
+f.write(OUTPUT)
+print(OUTPUT)
+response = requests.get(
+    'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(TELEGRAM_TOKEN, TELEGRAM_CHAT, OUTPUT))
 f.close()
