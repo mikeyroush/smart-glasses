@@ -15,7 +15,7 @@ with open('telegramToken.json') as f:
 
 # variable declarations
 FOLDER_PATH = r'./images'
-INPUT_FILE = 'test6.jpg'
+INPUT_FILE = 'test5.jpg'
 TELEGRAM_TOKEN = data['token']
 TELEGRAM_CHAT = data['chat']
 OUTPUT = ""
@@ -68,6 +68,9 @@ else:
 f = open(OUTPUT_FILE, "w")
 f.write(OUTPUT)
 print(OUTPUT)
-response = requests.get(
+response1 = requests.get('https://api.telegram.org/bot{}/sendPhoto?chat_id={}'.format(
+    TELEGRAM_TOKEN, TELEGRAM_CHAT), files=dict(photo=content))
+print(response1.status_code)
+response2 = requests.get(
     'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(TELEGRAM_TOKEN, TELEGRAM_CHAT, OUTPUT))
 f.close()
