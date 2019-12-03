@@ -4,6 +4,7 @@ import os
 import io
 from google.cloud import vision
 from google.cloud import translate_v2 as translate
+from gtts import gTTS
 import pandas as pd
 import json
 import requests
@@ -15,7 +16,7 @@ with open('telegramToken.json') as f:
 
 # variable declarations
 FOLDER_PATH = r'./images'
-INPUT_FILE = 'test7.jpg'
+INPUT_FILE = 'test5.jpg'
 TELEGRAM_TOKEN = data['token']
 TELEGRAM_CHAT = data['chat']
 OUTPUT = ""
@@ -73,3 +74,9 @@ response1 = requests.get('https://api.telegram.org/bot{}/sendPhoto?chat_id={}&ca
 print(response1.status_code)
 # response2 = requests.get('https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(TELEGRAM_TOKEN, TELEGRAM_CHAT, OUTPUT))
 f.close()
+
+# say the output
+os.system("say " + OUTPUT)
+# tts = gTTS(text=OUTPUT, lang='en', slow=False)
+# tts.save("output.mp3")
+# os.system("start output.mp3")
