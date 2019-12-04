@@ -76,7 +76,6 @@ print(response1.status_code)
 f.close()
 
 # say the output
-os.system("say " + OUTPUT)
 tts = gTTS(text=OUTPUT, lang='en', slow=False)
 tts.save("output.mp3")
 os.system("mpg321 output.mp3")
