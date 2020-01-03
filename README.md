@@ -15,36 +15,53 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing and Running
 
-Download the zip then link the files in the command line via the makefile and run the executable
+Download the zip then create a virtual environment and install the dependencies from requirements.txt 
 
-Navigate to the correct directory and utilize the makefile
+Make sure you have `virtualenv`
+
+```console
+foo@bar:~$ pip3 install virtualenv
+```
+
+Navigate to the correct directory then create and source a virtual environment and install the dependencies
 
 ```console
 foo@bar:~$ cd /path/to/directory/here
-foo@bar:~$ make all
+foo@bar:~$ virtualenv venv
+foo@bar:~$ source venv/bin/activate
+(venv) foo@bar:~$ pip install -r requirements.txt
 ```
 
-This will have created a few .o files and an executable. To run it, do as follows...
-
-```console
-foo@bar:~$ ./Main
-```
+At this point, make sure you have the appropriate JSON files and/or comment out the undesired functionality. Finally, execute the program. (main.py includes full functionality to take a picture and process it while visionAPI.py uses pictures from the images directory)
 
 Demo
 
 ```console
+(venv) foo@bar:~$ python visionAPI.py
+Translation: THE BEST IN LIFE YOU FIND IT WITHOUT LOOKING FOR IT
+200
+High Performance MPEG 1.0/2.0/2.5 Audio Player for Layer 1, 2, and 3.
+Version 0.3.2-1 (2012/03/25). Written and copyrights by Joe Drew,
+now maintained by Nanakos Chrysostomos and others.
+Uses code from various people. See 'README' for more!
+THIS SOFTWARE COMES WITH ABSOLUTELY NO WARRANTY! USE AT YOUR OWN RISK!
 
+Playing MPEG stream from output.mp3 ...
+MPEG 2.0 layer III, 32 kbit/s, 24000 Hz mono
+
+[0:04] Decoding of output.mp3 finished.
 ```
 
-Example output after converting ppm to a jpg
+Example Telegram output
 
-![map with greedy paths](map-input-844-480.dat.jpg)
+![telegram output](telegram.jpg)
 
 ## Authors
 
-* **Michael Roush** - *Project completion*
+* **Michael Roush** - *visionAPI.py*
+* **Jonathan Williams** - *additions to main.py*
 
 ## License
 
-Copyright © 2017 Michael Roush. All rights reserved.
+Copyright © 2019 Michael Roush. All rights reserved.
 
