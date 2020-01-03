@@ -54,7 +54,7 @@ MPEG 2.0 layer III, 32 kbit/s, 24000 Hz mono
 
 Example Telegram output
 
-![telegram output](telegram.jpg)
+![telegram output](images/telegram.jpg)
 
 ## Authors
 
